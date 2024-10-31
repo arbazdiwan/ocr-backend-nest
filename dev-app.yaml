@@ -7,4 +7,4 @@ env_variables:
   PROJECT_ID: 'ocr-dev-440305'
   TZ: IST
   NODE_OPTIONS: ''
-  PORT: 8080
+  PORT: 3000
