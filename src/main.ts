@@ -8,8 +8,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const configService = app.get(ConfigService);
-  const port =
-    configService.get<IServerConfig>(CONFIG_KEYS.SERVER).port ?? 3000;
+  const port = Number(
+    configService.get<IServerConfig>(CONFIG_KEYS.SERVER).port ?? 3000,
+  );
 
   await app.listen(port);
 
