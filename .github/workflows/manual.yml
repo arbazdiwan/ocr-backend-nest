@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Enter branch to deploy"
+        description: 'Enter branch to deploy'
         required: true
-        default: "dev"
+        default: 'dev'
 
 jobs:
   deploy:
@@ -24,11 +24,14 @@ jobs:
         name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: "20"
+          node-version: '20'
       - id: install-dependencies
         name: Install node dependencies
         run: npm install
-      - uses: "google-github-actions/auth@v2"
+      - id: build-app
+        name: Build App
+        run: npm run build
+      - uses: 'google-github-actions/auth@v2'
         with:
           credentials_json: ${{ secrets.OCR_DEPLOYMENT_SERVICE_ACCOUNT }}
           project_id: ${{ secrets.PROJECT_ID }}
@@ -36,4 +39,3 @@ jobs:
         uses: google-github-actions/deploy-appengine@v2
         with:
           deliverables: dev-app.yaml
-
